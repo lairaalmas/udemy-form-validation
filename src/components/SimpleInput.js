@@ -5,19 +5,28 @@ const SimpleInput = (props) => {
   const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
+  // if field was invalid on blur && user enters new value
+  // remove error message
   const nameInputChangeHandler = (e) => {
     setEnteredName(e.target.value);
+
+    if (e.target.value.trim() !== "") {
+      setEnteredNameIsValid(true);
+    }
   };
 
+  // if field is empty on blur
+  // dispplay error message
   const nameInputBlurHandler = (e) => {
     setEnteredNameTouched(true);
 
     if (enteredName.trim() === "") {
       setEnteredNameIsValid(false);
-      return;
     }
   };
 
+  // if field is invalid on submit
+  // display error message
   const formSubmitionHandler = (e) => {
     e.preventDefault();
 
